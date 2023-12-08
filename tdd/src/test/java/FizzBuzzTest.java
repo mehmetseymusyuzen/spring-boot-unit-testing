@@ -1,4 +1,6 @@
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class FizzBuzzTest {
@@ -58,5 +60,35 @@ class FizzBuzzTest {
         Assertions.assertEquals(expected, fizzBuzz.compute(1), "Should return Number");
 
     }
-    
+
+    @DisplayName("Testing with Small data file")
+    @Order(5)
+    @ParameterizedTest(name = "value={0}, expected={1}")
+    @CsvFileSource(resources = "/small-test-data.csv")
+    void testSmallDataFile(int value, String expected) {
+
+        Assertions.assertEquals(expected, fizzBuzz.compute(value));
+
+    }
+
+    @DisplayName("Testing with Medium data file")
+    @Order(6)
+    @ParameterizedTest(name = "value={0}, expected={1}")
+    @CsvFileSource(resources = "/medium-test-data.csv")
+    void testMediumDataFile(int value, String expected) {
+
+        Assertions.assertEquals(expected, fizzBuzz.compute(value));
+
+    }
+
+    @DisplayName("Testing with Large data file")
+    @Order(7)
+    @ParameterizedTest(name = "value={0}, expected={1}")
+    @CsvFileSource(resources = "/large-test-data.csv")
+    void testLargeDataFile(int value, String expected) {
+
+        Assertions.assertEquals(expected, fizzBuzz.compute(value));
+
+    }
+
 }
